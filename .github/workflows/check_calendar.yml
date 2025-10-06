@@ -2,7 +2,7 @@ name: Check Outlook Calendar Daily
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # Chạy mỗi ngày lúc 01:00 UTC
+    - cron: '10 7 * * *'  # Chạy mỗi ngày lúc 07:10 UTC (tương đương 14:10 giờ Việt Nam)
   workflow_dispatch:
 
 jobs:
@@ -25,6 +25,6 @@ jobs:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           TENANT_ID: ${{ secrets.TENANT_ID }}
-          USER_EMAIL: Kurumi@svpl5.onmicrosoft.com
+          USER_EMAIL: Lieuthan26@4186ph.onmicrosoft.com
         run: |
-          python scripts/check_calendar.py
+          python check_calendar.py
