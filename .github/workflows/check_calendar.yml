@@ -1,0 +1,30 @@
+name: Check Outlook Calendar Daily
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Chạy mỗi ngày lúc 01:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-calendar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests msal
+
+      - name: Run calendar check script
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          USER_EMAIL: Kurumi@svpl5.onmicrosoft.com
+        run: |
+          python scripts/check_calendar.py
